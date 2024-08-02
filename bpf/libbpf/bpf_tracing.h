@@ -142,7 +142,7 @@ struct pt_regs___s390 {
 #define __PT_SP_REG gprs[15]
 #define __PT_IP_REG psw.addr
 
-#elif defined(bpf_target_arm)
+#elif defined(bpf_target_arm_orig)
 
 /*
  * https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst#machine-registers
@@ -152,6 +152,10 @@ struct pt_regs___s390 {
 #define __PT_PARM2_REG uregs[1]
 #define __PT_PARM3_REG uregs[2]
 #define __PT_PARM4_REG uregs[3]
+// Added based on upstream to avoid bpf compilation errors. Unclear why there is a difference
+// in this local header
+// https://elixir.bootlin.com/linux/v6.1.56/source/tools/lib/bpf/bpf_tracing.h#L150
+#define __PT_PARM5_REG uregs[4]
 
 #define __PT_PARM1_SYSCALL_REG __PT_PARM1_REG
 #define __PT_PARM2_SYSCALL_REG __PT_PARM2_REG
@@ -166,6 +170,31 @@ struct pt_regs___s390 {
 #define __PT_RC_REG uregs[0]
 #define __PT_SP_REG uregs[13]
 #define __PT_IP_REG uregs[12]
+
+
+
+// Copied directly from local header, add SYSCALL_REG definitions below 
+#elif defined(bpf_target_arm)
+
+#define __PT_PARM1_REG uregs[0]
+#define __PT_PARM2_REG uregs[1]
+#define __PT_PARM3_REG uregs[2]
+#define __PT_PARM4_REG uregs[3]
+#define __PT_PARM5_REG uregs[4]
+
+#define __PT_RET_REG uregs[14]
+#define __PT_FP_REG uregs[11]   /* Works only with CONFIG_FRAME_POINTER */
+#define __PT_RC_REG uregs[0]
+#define __PT_SP_REG uregs[13]
+#define __PT_IP_REG uregs[12]
+
+#define __PT_PARM1_SYSCALL_REG __PT_PARM1_REG
+#define __PT_PARM2_SYSCALL_REG __PT_PARM2_REG
+#define __PT_PARM3_SYSCALL_REG __PT_PARM3_REG
+#define __PT_PARM4_SYSCALL_REG __PT_PARM4_REG
+#define __PT_PARM5_SYSCALL_REG uregs[4]
+#define __PT_PARM6_SYSCALL_REG uregs[5]
+#define __PT_PARM7_SYSCALL_REG uregs[6]
 
 #elif defined(bpf_target_arm64)
 

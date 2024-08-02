@@ -78,7 +78,7 @@ endif
 
 # GO_BUILD_FLAGS is initialized to empty use EXTRA_GO_BUILD_FLAGS to add build flags
 GO_BUILD_FLAGS =
-GO_BUILD_FLAGS += -ldflags "$(GO_BUILD_LDFLAGS)"
+GO_BUILD_FLAGS += -ldflags "$(GO_BUILD_LDFLAGS)" -p ${JOBS}
 ifeq ($(NOOPT),1)
 	GO_BUILD_GCFLAGS = "all=-N -l"
     GO_BUILD_FLAGS += -gcflags=$(GO_BUILD_GCFLAGS)

@@ -32,7 +32,7 @@ const (
 	ListTypeGeneratedSyscalls = 2
 	ListTypeGeneratedFtrace   = 3
 
-	Is32Bit = 0x80000000
+	//Is32Bit = 0x80000000
 )
 
 var listTypeTable = map[string]uint32{
@@ -162,9 +162,11 @@ func (lr *listReader) Read(name string, ty uint32) ([]uint32, error) {
 		if id == -1 {
 			return []uint32{}, fmt.Errorf("failed list '%s' cannot translate syscall '%s'", name, sc)
 		}
+		/*
 		if is32 {
 			id |= Is32Bit
 		}
+		*/
 		res = append(res, uint32(id))
 	}
 

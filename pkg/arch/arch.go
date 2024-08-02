@@ -10,7 +10,13 @@ import (
 	"testing"
 )
 
-var supportedArchPrefix = map[string]string{"amd64": "__x64_", "arm64": "__arm64_", "i386": "__ia32_"}
+var supportedArchPrefix = map[string]string{
+	"amd64": "__x64_", "arm64": "__arm64_", "i386": "__ia32_", 
+	// Oddly: $ grep "sys_fork" /proc/kallsyms
+	// 00000000 T sys_fork
+	// no prefix ??
+	"arm": "",
+}
 
 func addSyscallPrefix(symbol string, arch string) (string, error) {
 	for prefix_arch, prefix := range supportedArchPrefix {

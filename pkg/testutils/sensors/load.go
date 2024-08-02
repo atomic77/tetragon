@@ -139,7 +139,8 @@ func mergeInBaseSensorMaps(t *testing.T, sensorMaps []SensorMap, sensorProgs []S
 	var baseProgs = []SensorProg{
 		0: SensorProg{Name: "event_execve", Type: ebpf.TracePoint},
 		1: SensorProg{Name: "event_exit", Type: ebpf.Kprobe, Match: ProgMatchPartial},
-		2: SensorProg{Name: "event_wake_up_new_task", Type: ebpf.Kprobe},
+		//2: SensorProg{Name: "event_wake_up_new_task", Type: ebpf.Kprobe},
+		2: SensorProg{Name: "event_exit", Type: ebpf.Kprobe},
 		3: SensorProg{Name: "execve_send", Type: ebpf.TracePoint},
 		4: SensorProg{Name: "tg_kp_bprm_committing_creds", Type: ebpf.Kprobe},
 		5: SensorProg{Name: "execve_rate", Type: ebpf.TracePoint},
